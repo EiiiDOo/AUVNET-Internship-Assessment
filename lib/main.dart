@@ -1,3 +1,4 @@
+import 'package:auvnet_internship_assessment/core/theme/app_theme.dart';
 import 'package:auvnet_internship_assessment/features/startup/presentation/screens/startup_screen.dart';
 import 'package:auvnet_internship_assessment/injection.dart';
 import 'package:auvnet_internship_assessment/routes/routes_generator.dart';
@@ -24,6 +25,7 @@ class NawelApp extends StatelessWidget {
     return MaterialApp(
       home: StartupScreen(),
       onGenerateRoute: RouteGenerator.generateRoute,
+      theme: AppTheme.lightTheme,
     );
   }
 }

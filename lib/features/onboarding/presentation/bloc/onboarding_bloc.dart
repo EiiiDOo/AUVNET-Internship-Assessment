@@ -8,7 +8,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
 
   OnboardingBloc(this.markOnboardingSeen) : super(OnboardingInitial()) {
     on<OnboardingCompleted>((event, emit) async {
-      markOnboardingSeen();
+      await markOnboardingSeen();
       emit(OnboardingDone());
     });
   }

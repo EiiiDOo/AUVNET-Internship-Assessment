@@ -28,12 +28,13 @@ Future<void> setupInjection() async {
     () => StartupLocalDatasourceImpl(getIt<LocalStorage>()),
   );
   getIt.registerLazySingleton<StartupRepository>(
+    //StartupRepository
     () => StartupRepositoryImpl(getIt<StartupLocalDatasource>()),
   );
 
   // Domain
   getIt.registerLazySingleton(
-    () => GetStartupStatus(getIt<StartupRepositoryImpl>()),
+    () => GetStartupStatus(getIt<StartupRepository>()),
   );
 
   // Bloc
@@ -50,7 +51,7 @@ Future<void> setupInjection() async {
   );
 
   // Domain
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<MarkOnboardingSeen>(
     () => MarkOnboardingSeen(getIt<OnboardingRepository>()),
   );
 
