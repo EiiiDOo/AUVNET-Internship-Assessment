@@ -35,11 +35,22 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         builder: (context, state) {
           return Scaffold(
             body: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // TODO: Handel image
-                Image.asset('assets/images/background_logo.png'),
                 Expanded(
+                  flex: 2,
+                  child: Transform.translate(
+                    // TODO:Handel image take care About APP Direction
+                    offset: Offset(-40, -20),
+                    child: Image.asset(
+                      'assets/images/background_logo.png',
+                      alignment: Alignment.centerRight,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
                   child: PageView.builder(
                     controller: _pageController,
                     itemCount: onboardingPages.length,
@@ -67,66 +78,64 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                   ),
                 ),
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Container(
-                      width: width,
-                      height: height / 3,
-                      decoration: BoxDecoration(
-                        // TODO: Handel gradiant
-                        gradient: RadialGradient(
-                          center: Alignment.bottomRight,
-                          radius: 1,
-                          colors: [
-                            const Color.fromARGB(41, 14, 190, 125),
-                            AppColors.background,
-                          ],
-                        ),
-                      ),
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                          child: SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.pushReplacementNamed(
-                                  context,
-                                  AppRoutes.login,
-                                );
-                              },
-
-                              child: Text("Get Started"),
-                            ),
+                Expanded(
+                  flex: 1,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Container(
+                        width: width,
+                        height: height / 3,
+                        decoration: BoxDecoration(
+                          // TODO: Handel gradiant
+                          gradient: RadialGradient(
+                            center: Alignment.bottomRight,
+                            radius: 1,
+                            colors: [
+                              const Color.fromARGB(41, 14, 190, 125),
+                              AppColors.background,
+                            ],
                           ),
                         ),
-                        TextButton(
-                          onPressed: _currentPage == onboardingPages.length - 1
-                              ? null
-                              : () {
-                                  if (_currentPage ==
-                                      onboardingPages.length - 1) {
-                                    context.read<OnboardingBloc>().add(
-                                      OnboardingCompleted(),
-                                    );
-                                  } else {
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 30.0,
+                            ),
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  context.read<OnboardingBloc>().add(
+                                    OnboardingCompleted(),
+                                  );
+                                },
+
+                                child: Text("Get Started"),
+                              ),
+                            ),
+                          ),
+                          TextButton(
+                            onPressed:
+                                _currentPage == onboardingPages.length - 1
+                                ? null
+                                : () {
                                     _pageController.nextPage(
                                       duration: const Duration(
                                         milliseconds: 300,
                                       ),
                                       curve: Curves.easeIn,
                                     );
-                                  }
-                                },
-                          child: Text("Next"),
-                        ),
-                      ],
-                    ),
-                  ],
+                                  },
+                            child: Text("Next"),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
