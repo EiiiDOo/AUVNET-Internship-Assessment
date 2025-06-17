@@ -9,11 +9,11 @@ class StartupLocalDatasourceImpl implements StartupLocalDatasource {
 
   @override
   Future<bool> isFirstTime() async {
-    return await localStorage.readBool(StorageKeys.firstTime) ?? true;
+    return await localStorage.get(StorageKeys.firstTime.name) ?? true;
   }
 
   @override
   Future<bool> isUserLoggedIn() async {
-    return await localStorage.readBool(StorageKeys.loggedIn) ?? false;
+    return await localStorage.get(StorageKeys.loggedIn.name) ?? false;
   }
 }

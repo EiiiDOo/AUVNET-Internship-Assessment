@@ -1,0 +1,2 @@
+final String API_KEY_ANON_PUBLIC = 'ANON_KEY';
+final String PROJECT_URL = 'PROJECT_URL';

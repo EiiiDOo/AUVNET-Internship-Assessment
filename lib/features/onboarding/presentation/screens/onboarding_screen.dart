@@ -92,7 +92,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             center: Alignment.bottomRight,
                             radius: 1,
                             colors: [
-                              const Color.fromARGB(41, 14, 190, 125),
+                              AppColors.gradientStart,
                               AppColors.background,
                             ],
                           ),
@@ -113,7 +113,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     OnboardingCompleted(),
                                   );
                                 },
-
                                 child: Text("Get Started"),
                               ),
                             ),

@@ -12,6 +12,13 @@ class AppTheme {
       titleSmall: AppTextStyles.description,
       labelLarge: AppTextStyles.link,
     ),
+
+    // REVIEW: there is no  Effect
+    iconTheme: IconThemeData(color: AppColors.descText),
+    // REVIEW:there is no  Effect
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(textStyle: AppTextStyles.link),
+    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary,
@@ -20,6 +27,7 @@ class AppTheme {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadiusGeometry.all(Radius.circular(10)),
         ),
+        textStyle: AppTextStyles.authBtn,
       ),
     ),
   );

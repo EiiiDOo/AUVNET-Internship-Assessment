@@ -8,17 +8,17 @@ class HiveStorage implements LocalStorage {
   HiveStorage(this.box);
 
   @override
-  Future<void> writeBool(StorageKeys key, bool value) async {
-    await box.put(key.name, value);
-  }
-
-  @override
-  Future<bool?> readBool(StorageKeys key) async {
-    return box.get(key.name) as bool?;
-  }
-
-  @override
   Future<void> delete(StorageKeys key) async {
     await box.delete(key.name);
+  }
+
+  @override
+  Future<void> put(String key, value) async {
+    await box.put(key, value);
+  }
+
+  @override
+  get(String key) async {
+    return box.get(key);
   }
 }

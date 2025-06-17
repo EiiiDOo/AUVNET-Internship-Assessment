@@ -1,1 +1,1 @@
-enum StorageKeys { firstTime, notLoggedIn, loggedIn }
+enum StorageKeys { firstTime, notLoggedIn, loggedIn, user }

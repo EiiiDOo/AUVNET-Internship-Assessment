@@ -1,7 +1,7 @@
 import 'package:auvnet_internship_assessment/core/constants/storage_keys.dart';
 
 abstract class LocalStorage {
-  Future<void> writeBool(StorageKeys key, bool value);
-  Future<bool?> readBool(StorageKeys key);
+  dynamic get(String key);
   Future<void> delete(StorageKeys key);
+  Future<void> put(String key, dynamic value);
 }

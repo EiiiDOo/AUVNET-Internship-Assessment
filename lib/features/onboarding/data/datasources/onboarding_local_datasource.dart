@@ -12,6 +12,6 @@ class OnboardingLocalDatasourceImpl implements OnboardingLocalDatasource {
 
   @override
   Future<void> markOnboardingSeen() async {
-    await localStorage.writeBool(StorageKeys.firstTime, false);
+    await localStorage.put(StorageKeys.firstTime.name, false);
   }
 }

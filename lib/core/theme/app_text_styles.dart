@@ -13,5 +13,15 @@ class AppTextStyles {
     color: AppColors.descText,
   );
 
-  static const TextStyle link = TextStyle(fontSize: 14, color: AppColors.link);
+  static const TextStyle authBtn = TextStyle(
+    fontSize: 18,
+    color: AppColors.background,
+    fontWeight: FontWeight.w600,
+  );
+
+  static const TextStyle link = TextStyle(
+    fontSize: 14,
+    color: AppColors.link,
+    fontWeight: FontWeight.bold,
+  );
 }
