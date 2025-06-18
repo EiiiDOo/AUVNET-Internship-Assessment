@@ -1,4 +1,4 @@
-import 'package:auvnet_internship_assessment/core/constants/storage_keys.dart';
+import 'package:auvnet_internship_assessment/core/constants/local_storage_keys.dart';
 import 'package:hive/hive.dart';
 import 'local_storage.dart';
 
@@ -8,7 +8,7 @@ class HiveStorage implements LocalStorage {
   HiveStorage(this.box);
 
   @override
-  Future<void> delete(StorageKeys key) async {
+  Future<void> delete(LocalStorageKeys key) async {
     await box.delete(key.name);
   }
 
@@ -20,5 +20,10 @@ class HiveStorage implements LocalStorage {
   @override
   get(String key) async {
     return box.get(key);
+  }
+
+  @override
+  Future<void> putAll(Map<String, dynamic> values) async {
+    await box.putAll(values);
   }
 }

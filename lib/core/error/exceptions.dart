@@ -8,7 +8,7 @@ class AuthFailure extends Failure {
 }
 
 class NetworkFailure extends Failure {
-  NetworkFailure() : super("No internet connection.");
+  NetworkFailure(super.message);
 }
 
 class UnknownFailure extends Failure {
@@ -25,4 +25,8 @@ class DotEnvFailure extends Failure {
 
 class GetItFailure extends Failure {
   GetItFailure(super.message);
+}
+
+class DataFailure extends Failure {
+  DataFailure(super.message);
 }

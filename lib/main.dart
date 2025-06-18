@@ -3,6 +3,11 @@ import 'package:auvnet_internship_assessment/core/constants/dot_env_keys.dart';
 import 'package:auvnet_internship_assessment/core/error/error_app.dart';
 import 'package:auvnet_internship_assessment/core/error/exceptions.dart';
 import 'package:auvnet_internship_assessment/core/theme/app_theme.dart';
+import 'package:auvnet_internship_assessment/features/home/data/models/advertising_model.dart';
+import 'package:auvnet_internship_assessment/features/home/data/models/discount_code_model.dart';
+import 'package:auvnet_internship_assessment/features/home/data/models/popular_restaurant_model.dart';
+import 'package:auvnet_internship_assessment/features/home/data/models/services_model.dart';
+import 'package:auvnet_internship_assessment/features/home/data/models/shortcuts_model.dart';
 import 'package:auvnet_internship_assessment/features/startup/presentation/screens/startup_screen.dart';
 import 'package:auvnet_internship_assessment/injection.dart';
 import 'package:auvnet_internship_assessment/routes/routes_generator.dart';
@@ -38,6 +43,11 @@ Future<Widget> startupInitialization() async {
   try {
     Hive.init((await getApplicationDocumentsDirectory()).path);
     await Hive.openBox('mybox');
+    Hive.registerAdapter(AdvertisingModelAdapter());
+    Hive.registerAdapter(DiscountCodeModelAdapter());
+    Hive.registerAdapter(ShortcutsModelAdapter());
+    Hive.registerAdapter(PopularRestaurantNearbyModelAdapter());
+    Hive.registerAdapter(ServicesModelAdapter());
 
     await dotenv.load();
 

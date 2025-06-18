@@ -4,7 +4,7 @@ import 'package:auvnet_internship_assessment/features/authentication/data/servic
 import 'package:auvnet_internship_assessment/features/authentication/data/models/user_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class SupabaseAuthServiceImpl implements RemoteCloudServices {
+class SupabaseAuthServiceImpl implements RemoteCloudAuthServices {
   final SupabaseClient client;
 
   SupabaseAuthServiceImpl({required this.client});
@@ -12,6 +12,7 @@ class SupabaseAuthServiceImpl implements RemoteCloudServices {
   @override
   Future<UserModel?> getUser() async {
     try {
+      client.from("table").select();
       final user = client.auth.currentUser;
       return user != null
           ? UserModel(email: user.email ?? UserErrorKeys.userWIthoutEmail)

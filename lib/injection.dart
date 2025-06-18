@@ -2,7 +2,7 @@ import 'package:auvnet_internship_assessment/core/constants/hive_keys.dart';
 import 'package:auvnet_internship_assessment/core/network/network._info.dart';
 import 'package:auvnet_internship_assessment/core/network/network_info_impl.dart';
 import 'package:auvnet_internship_assessment/features/authentication/data/services/remote_cloud_services.dart';
-import 'package:auvnet_internship_assessment/features/authentication/data/services/supabase_auth_services_impl.dart';
+import 'package:auvnet_internship_assessment/features/authentication/data/services/supabase_cloud_auth_services_impl.dart';
 import 'package:auvnet_internship_assessment/core/storage/hive_storage.dart';
 import 'package:auvnet_internship_assessment/core/storage/local_storage.dart';
 import 'package:auvnet_internship_assessment/features/authentication/data/data_sources/auth_remote_data_source.dart';
@@ -15,6 +15,17 @@ import 'package:auvnet_internship_assessment/features/authentication/domain/use_
 import 'package:auvnet_internship_assessment/features/authentication/domain/use_cases/sign_up_with_email_use_case.dart';
 import 'package:auvnet_internship_assessment/features/authentication/domain/use_cases/signin_with_email_use_case.dart';
 import 'package:auvnet_internship_assessment/features/authentication/presentation/bloc/auth_bloc.dart';
+import 'package:auvnet_internship_assessment/features/home/data/data_sources/home_remote_data_source.dart';
+import 'package:auvnet_internship_assessment/features/home/data/repositories/home_repository_impl.dart';
+import 'package:auvnet_internship_assessment/features/home/domain/repositories/home_repository.dart';
+import 'package:auvnet_internship_assessment/features/home/domain/use_cases/get_advertising_list_usecase.dart';
+import 'package:auvnet_internship_assessment/features/home/domain/use_cases/get_discount_codes_list_usecase.dart';
+import 'package:auvnet_internship_assessment/features/home/domain/use_cases/get_popular_restaurant_nearby_list_usecase.dart';
+import 'package:auvnet_internship_assessment/features/home/domain/use_cases/get_services_list_usecase.dart';
+import 'package:auvnet_internship_assessment/features/home/domain/use_cases/get_shortcuts_list_usecase.dart';
+import 'package:auvnet_internship_assessment/features/home/presentation/bloc/home_bloc.dart';
+import 'package:auvnet_internship_assessment/features/home/services/remote_cloud_database.dart';
+import 'package:auvnet_internship_assessment/features/home/services/supabase_remote_cloud_database_impl.dart';
 import 'package:auvnet_internship_assessment/features/onboarding/data/data_sources/onboarding_local_datasource.dart';
 import 'package:auvnet_internship_assessment/features/onboarding/data/repositories/onboarding_repository_impl.dart';
 import 'package:auvnet_internship_assessment/features/onboarding/domain/repositories/onboarding_repository.dart';
@@ -49,9 +60,14 @@ Future<void> setupInjection() async {
   // Supabase Client
   getIt.registerLazySingleton<SupabaseClient>(() => Supabase.instance.client);
 
-  // Remote Cloud Service
-  getIt.registerLazySingleton<RemoteCloudServices>(
-    () => SupabaseAuthServiceImpl(client: getIt()),
+  // Remote Cloud Auth Service
+  getIt.registerLazySingleton<RemoteCloudAuthServices>(
+    () => SupabaseAuthServiceImpl(client: getIt<SupabaseClient>()),
+  );
+
+  // Remote Cloud Storage
+  getIt.registerLazySingleton<RemoteCloudDatabase>(
+    () => SupabaseRemoteCloudDatabaseImpl(supabase: getIt<SupabaseClient>()),
   );
 
   // startup
@@ -96,7 +112,7 @@ Future<void> setupInjection() async {
 
   // data
   getIt.registerLazySingleton<AuthRemoteDataSource>(
-    () => AuthRemoteDataSourceImpl(getIt<RemoteCloudServices>()),
+    () => AuthRemoteDataSourceImpl(getIt<RemoteCloudAuthServices>()),
   );
 
   getIt.registerLazySingleton<AuthRepository>(
@@ -120,4 +136,49 @@ Future<void> setupInjection() async {
 
   // bloc
   getIt.registerFactory(() => AuthBloc(authUseCases: getIt<AuthUseCases>()));
+  // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+  // Home
+  // data
+  getIt.registerLazySingleton<HomeRemoteDataSource>(
+    () => HomeRemoteDataSourceImpl(
+      remoteCloudDatabase: getIt<RemoteCloudDatabase>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<HomeRepository>(
+    () => HomeRepositoryImpl(
+      homeRemoteDataSource: getIt<HomeRemoteDataSource>(),
+      networkInfo: getIt<NetworkInfo>(),
+      localStorage: getIt<LocalStorage>(),
+    ),
+  );
+
+  // domain
+  getIt.registerLazySingleton<GetPopularRestaurantNearbyListUseCase>(
+    () => GetPopularRestaurantNearbyListUseCase(getIt<HomeRepository>()),
+  );
+  getIt.registerLazySingleton<GetAdvertisingListUseCase>(
+    () => GetAdvertisingListUseCase(getIt<HomeRepository>()),
+  );
+  getIt.registerLazySingleton<GetShortcutsListUseCase>(
+    () => GetShortcutsListUseCase(getIt<HomeRepository>()),
+  );
+  getIt.registerLazySingleton<GetServicesListUseCase>(
+    () => GetServicesListUseCase(getIt<HomeRepository>()),
+  );
+  getIt.registerLazySingleton<GetDiscountCodesListUseCase>(
+    () => GetDiscountCodesListUseCase(getIt<HomeRepository>()),
+  );
+
+  // Presentation
+  getIt.registerFactory<HomeBloc>(
+    () => HomeBloc(
+      getAdvertisingList: getIt(),
+      getDiscountCodesList: getIt(),
+      getShortcutsList: getIt(),
+      getNearbyRestaurants: getIt(),
+      getServicesList: getIt(),
+    ),
+  );
 }

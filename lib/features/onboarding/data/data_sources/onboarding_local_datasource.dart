@@ -1,4 +1,4 @@
-import 'package:auvnet_internship_assessment/core/constants/storage_keys.dart';
+import 'package:auvnet_internship_assessment/core/constants/local_storage_keys.dart';
 import 'package:auvnet_internship_assessment/core/storage/local_storage.dart';
 
 abstract class OnboardingLocalDatasource {
@@ -12,6 +12,6 @@ class OnboardingLocalDatasourceImpl implements OnboardingLocalDatasource {
 
   @override
   Future<void> markOnboardingSeen() async {
-    await localStorage.put(StorageKeys.firstTime.name, false);
+    await localStorage.put(LocalStorageKeys.firstTime.name, false);
   }
 }

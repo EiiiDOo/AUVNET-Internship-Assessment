@@ -9,7 +9,7 @@ abstract class AuthRemoteDataSource {
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
-  final RemoteCloudServices authServices;
+  final RemoteCloudAuthServices authServices;
 
   AuthRemoteDataSourceImpl(this.authServices);
 

@@ -1,4 +1,4 @@
-import 'package:auvnet_internship_assessment/core/constants/storage_keys.dart';
+import 'package:auvnet_internship_assessment/core/constants/local_storage_keys.dart';
 import 'package:auvnet_internship_assessment/core/constants/user_keys.dart';
 import 'package:auvnet_internship_assessment/core/error/exceptions.dart';
 import 'package:auvnet_internship_assessment/core/network/network._info.dart';
@@ -24,17 +24,17 @@ class AuthRepositoryImpl implements AuthRepository {
       final user = await remoteDataSource.getUser();
 
       if (user != null) {
-        localStorage.put(StorageKeys.user.name, user.toJson());
+        localStorage.put(LocalStorageKeys.user.name, user.toJson());
       }
 
       return user?.toEntity();
     }
-    throw NetworkFailure();
+    throw NetworkFailure('No internet connection');
   }
 
   @override
   Future<bool> isSignedIn() async {
-    final data = await localStorage.get(StorageKeys.user.name);
+    final data = await localStorage.get(LocalStorageKeys.user.name);
     if (data != null && data is Map && data.containsKey(UserKeys.email.name)) {
       return true;
     } else {
@@ -47,20 +47,20 @@ class AuthRepositoryImpl implements AuthRepository {
     if (await networkInfo.isConnected()) {
       final user = await remoteDataSource.signInWithEmail(email, password);
       if (user != null) {
-        localStorage.put(StorageKeys.user.name, user.toJson());
+        localStorage.put(LocalStorageKeys.user.name, user.toJson());
       }
       return user?.toEntity();
     }
-    throw NetworkFailure();
+    throw NetworkFailure('No internet connection');
   }
 
   @override
   Future<void> signOut() async {
     if (await networkInfo.isConnected()) {
       await remoteDataSource.signOut();
-      await localStorage.delete(StorageKeys.user);
+      await localStorage.delete(LocalStorageKeys.user);
     } else {
-      throw NetworkFailure();
+      throw NetworkFailure('No internet connection');
     }
   }
 
@@ -70,6 +70,6 @@ class AuthRepositoryImpl implements AuthRepository {
       final user = await remoteDataSource.signUpWithEmail(email, password);
       return user?.toEntity();
     }
-    throw NetworkFailure();
+    throw NetworkFailure('No internet connection');
   }
 }
