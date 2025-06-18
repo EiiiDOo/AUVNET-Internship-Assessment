@@ -14,6 +14,7 @@ class StartupLocalDatasourceImpl implements StartupLocalDatasource {
 
   @override
   Future<bool> isUserLoggedIn() async {
-    return await localStorage.get(StorageKeys.loggedIn.name) ?? false;
+    final user = await localStorage.get(StorageKeys.user.name);
+    return user != null ? true : false;
   }
 }
