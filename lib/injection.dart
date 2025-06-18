@@ -9,6 +9,11 @@ import 'package:auvnet_internship_assessment/features/authentication/data/data_s
 import 'package:auvnet_internship_assessment/features/authentication/data/repositories/auth_repository_impl.dart';
 import 'package:auvnet_internship_assessment/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:auvnet_internship_assessment/features/authentication/domain/use_cases/auth_use_cases.dart';
+import 'package:auvnet_internship_assessment/features/authentication/domain/use_cases/get_user_use_case.dart';
+import 'package:auvnet_internship_assessment/features/authentication/domain/use_cases/is_loggedin_use_case.dart';
+import 'package:auvnet_internship_assessment/features/authentication/domain/use_cases/sign_out_use_case.dart';
+import 'package:auvnet_internship_assessment/features/authentication/domain/use_cases/sign_up_with_email_use_case.dart';
+import 'package:auvnet_internship_assessment/features/authentication/domain/use_cases/signin_with_email_use_case.dart';
 import 'package:auvnet_internship_assessment/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:auvnet_internship_assessment/features/onboarding/data/data_sources/onboarding_local_datasource.dart';
 import 'package:auvnet_internship_assessment/features/onboarding/data/repositories/onboarding_repository_impl.dart';

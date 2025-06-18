@@ -1,5 +1,8 @@
-import 'package:auvnet_internship_assessment/features/authentication/domain/entities/user_entity.dart';
-import 'package:auvnet_internship_assessment/features/authentication/domain/repositories/auth_repository.dart';
+import 'package:auvnet_internship_assessment/features/authentication/domain/use_cases/get_user_use_case.dart';
+import 'package:auvnet_internship_assessment/features/authentication/domain/use_cases/is_loggedin_use_case.dart';
+import 'package:auvnet_internship_assessment/features/authentication/domain/use_cases/sign_out_use_case.dart';
+import 'package:auvnet_internship_assessment/features/authentication/domain/use_cases/sign_up_with_email_use_case.dart';
+import 'package:auvnet_internship_assessment/features/authentication/domain/use_cases/signin_with_email_use_case.dart';
 
 class AuthUseCases {
   final SignInWithEmailUseCase signInWithEmail;
@@ -15,48 +18,4 @@ class AuthUseCases {
     required this.isSignedIn,
     required this.getUser,
   });
-}
-
-class SignInWithEmailUseCase {
-  final AuthRepository repository;
-
-  SignInWithEmailUseCase(this.repository);
-
-  Future<UserEntity?> call(String email, String password) {
-    return repository.signInWithEmail(email, password);
-  }
-}
-
-class SignUpWithEmailUseCase {
-  final AuthRepository repository;
-
-  SignUpWithEmailUseCase(this.repository);
-
-  Future<UserEntity?> call(String email, String password) {
-    return repository.signUpWithEmail(email, password);
-  }
-}
-
-class SignOutUseCase {
-  final AuthRepository repository;
-
-  SignOutUseCase(this.repository);
-
-  Future<void> call() => repository.signOut();
-}
-
-class IsSignedInUseCase {
-  final AuthRepository repository;
-
-  IsSignedInUseCase(this.repository);
-
-  Future<bool> call() => repository.isSignedIn();
-}
-
-class GetUserUseCase {
-  final AuthRepository repository;
-
-  GetUserUseCase(this.repository);
-
-  Future<UserEntity?> call() => repository.getUser();
 }
