@@ -15,6 +15,25 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final appWidget = await startupInitialization();
+  runApp(appWidget);
+}
+
+class NawelApp extends StatelessWidget {
+  const NawelApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: StartupScreen(),
+      onGenerateRoute: RouteGenerator.generateRoute,
+      theme: AppTheme.lightTheme,
+    );
+  }
+}
+
+Future<Widget> startupInitialization() async {
   Widget appWidget;
   try {
     Hive.init((await getApplicationDocumentsDirectory()).path);
@@ -51,20 +70,5 @@ void main() async {
 
     appWidget = ErrorApp(failure: failure);
   }
-
-  runApp(appWidget);
-}
-
-class NawelApp extends StatelessWidget {
-  const NawelApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: StartupScreen(),
-      onGenerateRoute: RouteGenerator.generateRoute,
-      theme: AppTheme.lightTheme,
-    );
-  }
+  return appWidget;
 }
