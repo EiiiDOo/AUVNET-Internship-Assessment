@@ -21,11 +21,8 @@ class StartupScreen extends StatelessWidget {
               case StartupStatus.firstTime:
                 Navigator.pushReplacementNamed(context, AppRoutes.onboarding);
                 break;
-              case StartupStatus.notLoggedIn:
+              case StartupStatus.loggedIn || StartupStatus.notLoggedIn:
                 Navigator.pushReplacementNamed(context, AppRoutes.login);
-                break;
-              case StartupStatus.loggedIn:
-                Navigator.pushReplacementNamed(context, AppRoutes.home);
                 break;
             }
           }
