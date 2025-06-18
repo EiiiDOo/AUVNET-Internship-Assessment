@@ -64,7 +64,7 @@ class _SigninFromState extends State<SigninFrom> {
               } else if (state is AuthFailureState) {
                 customSnackBar(
                   ctx: context,
-                  content: Text(state.message),
+                  content: state.message,
                   type: SnackBarType.error,
                 );
               } else if (state is AuthSignedOutState) {
