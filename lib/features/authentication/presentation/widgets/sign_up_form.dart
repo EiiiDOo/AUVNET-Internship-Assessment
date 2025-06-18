@@ -1,5 +1,7 @@
 import 'package:auvnet_internship_assessment/core/utils/extensions.dart';
+import 'package:auvnet_internship_assessment/core/widgets/custom_dialog.dart';
 import 'package:auvnet_internship_assessment/core/widgets/custom_elevation_button.dart';
+import 'package:auvnet_internship_assessment/core/widgets/custom_snack_bar.dart';
 import 'package:auvnet_internship_assessment/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:auvnet_internship_assessment/features/authentication/presentation/bloc/auth_event.dart';
 import 'package:auvnet_internship_assessment/features/authentication/presentation/bloc/auth_state.dart'
@@ -56,17 +58,7 @@ class _SignUpFormState extends State<SignUpForm> {
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthLoadingState) {
-            showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (context) => AlertDialog(
-                title: Text("Wait..."),
-                content: SizedBox(
-                  height: 60,
-                  child: Center(child: CircularProgressIndicator()),
-                ),
-              ),
-            );
+            customLoadingDialog(context);
           } else {
             Navigator.of(context, rootNavigator: true).pop();
             if (state is AuthSuccessState) {
@@ -76,11 +68,10 @@ class _SignUpFormState extends State<SignUpForm> {
                 (route) => false,
               );
             } else if (state is AuthFailureState) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  backgroundColor: Colors.red,
-                  content: Text(state.message),
-                ),
+              customSnackBar(
+                ctx: context,
+                content: Text(state.message),
+                type: SnackBarType.error,
               );
             } else if (state is AuthSignedOutState) {
               // TODO: Navigate to login screen
