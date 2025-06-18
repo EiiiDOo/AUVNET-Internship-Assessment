@@ -73,7 +73,12 @@ class _SignUpFormState extends State<SignUpForm> {
                 type: SnackBarType.success,
                 content: "Please check your email",
               );
-              Navigator.pushReplacementNamed(context, AppRoutes.login);
+              //TODO:
+              Navigator.pushReplacementNamed(
+                context,
+                AppRoutes.login,
+                arguments: {"isSignUpSuccessfully": true},
+              );
             } else if (state is AuthFailureState) {
               customSnackBar(
                 ctx: context,
@@ -140,7 +145,10 @@ class _SignUpFormState extends State<SignUpForm> {
                           ),
                           TextButton(
                             onPressed: () {
-                              Navigator.pop(context);
+                              Navigator.pushReplacementNamed(
+                                context,
+                                AppRoutes.login,
+                              );
                             },
                             child: Text(
                               "Already have an account",
