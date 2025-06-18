@@ -1,6 +1,6 @@
 import 'package:auvnet_internship_assessment/features/authentication/presentation/screens/sign_in.dart';
 import 'package:auvnet_internship_assessment/features/authentication/presentation/screens/sign_up.dart';
-import 'package:auvnet_internship_assessment/features/home/presentation/screens/home.dart';
+import 'package:auvnet_internship_assessment/features/home/presentation/screens/home_page.dart';
 import 'package:auvnet_internship_assessment/features/onboarding/presentation/screens/onboarding_screen.dart';
 import 'package:auvnet_internship_assessment/features/startup/presentation/screens/startup_screen.dart';
 import 'package:auvnet_internship_assessment/routes/app_routes.dart';
