@@ -47,9 +47,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         event.email,
         event.password,
       );
-      if (user == null) {
-        emit(AuthSuccessState(user));
-      }
+
+      emit(AuthSuccessState(user));
     } catch (e) {
       emit(AuthFailureState(e.errorMessage));
     }
@@ -76,14 +75,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthLoadingState());
 
     try {
-      final isSignedIn = await authUseCases.isSignedIn();
-      if (isSignedIn) {
-        final user = await authUseCases.getUser();
-        if (user != null) {
-          emit(AuthSuccessState(user));
-        } else {
-          emit(AuthFailureState(UserErrorKeys.userNotFound));
-        }
+      final user = await authUseCases.getUser();
+      if (user != null) {
+        emit(AuthSuccessState(user));
       } else {
         emit(AuthSignedOutState());
       }

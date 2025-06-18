@@ -30,7 +30,13 @@ class StartupScreen extends StatelessWidget {
             }
           }
         },
-        child: const Scaffold(body: Center(child: CircularProgressIndicator())),
+        child: const Scaffold(
+          body: SizedBox(
+            width: 50,
+            height: 50,
+            child: Center(child: CircularProgressIndicator()),
+          ),
+        ),
       ),
     );
   }
