@@ -47,10 +47,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         event.email,
         event.password,
       );
-      if (user != null) {
+      if (user == null) {
         emit(AuthSuccessState(user));
-      } else {
-        emit(AuthFailureState(UserErrorKeys.couldNotRegisterUser));
       }
     } catch (e) {
       emit(AuthFailureState(e.errorMessage));

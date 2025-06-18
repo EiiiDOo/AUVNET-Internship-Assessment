@@ -68,11 +68,12 @@ class _SignUpFormState extends State<SignUpForm> {
           } else {
             Navigator.of(context, rootNavigator: true).pop();
             if (state is AuthSuccessState) {
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                AppRoutes.home,
-                (route) => false,
+              customSnackBar(
+                ctx: context,
+                type: SnackBarType.success,
+                content: Text("Please check your email"),
               );
+              Navigator.pushReplacementNamed(context, AppRoutes.login);
             } else if (state is AuthFailureState) {
               customSnackBar(
                 ctx: context,
