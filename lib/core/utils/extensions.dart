@@ -1,4 +1,3 @@
-import 'package:auvnet_internship_assessment/core/error/exceptions.dart';
 import 'package:flutter/material.dart';
 
 extension ContextExtensions on BuildContext {
