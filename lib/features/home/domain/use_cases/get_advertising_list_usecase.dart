@@ -7,8 +7,6 @@ class GetAdvertisingListUseCase {
   GetAdvertisingListUseCase(this.repository);
 
   Future<List<AdvertisingEntity>> call() {
-    print('UseCase: called GetAdvertisingListUseCase');
-
     return repository.getAdvertisingList();
   }
 }

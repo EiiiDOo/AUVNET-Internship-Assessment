@@ -88,12 +88,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (isLoggedIn) {
         emit(AuthSuccessState(null));
       } else {
-        if (kDebugMode) debugPrint('catch e isLoggedIn Else');
         emit(AuthFailureState(e.errorMessage));
       }
     } catch (e) {
-      if (kDebugMode) debugPrint('catch e');
-
       emit(AuthFailureState(e.errorMessage));
     }
   }

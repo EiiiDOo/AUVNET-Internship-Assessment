@@ -73,11 +73,6 @@ Future<Widget> startupInitialization() async {
       failure = UnknownFailure();
     }
 
-    if (kDebugMode) {
-      debugPrint(failure.message);
-      debugPrint(stackTrace.toString());
-    }
-
     appWidget = ErrorApp(failure: failure);
   }
   return appWidget;

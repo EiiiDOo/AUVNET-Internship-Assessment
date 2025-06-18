@@ -20,15 +20,12 @@ class SupabaseRemoteCloudDatabaseImpl extends RemoteCloudDatabase {
       final response = await supabase
           .from(RemoteStorageKey.ADVERTISING_TABLE_NAME)
           .select();
-      print('SupabaseRemoteCloudDatabaseImpl $response');
       return response.map((e) => AdvertisingModel.fromJson(e)).toList();
     } on PostgrestException catch (e) {
       throw DataFailure("Database error: ${e.message}");
     } on SocketException catch (e) {
       throw NetworkFailure("Network error: ${e.message}");
     } catch (e, stack) {
-      print('Supabase query failed: $e');
-      print('Stack: $stack');
       throw UnknownFailure();
     }
   }
