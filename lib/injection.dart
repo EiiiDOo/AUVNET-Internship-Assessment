@@ -9,6 +9,7 @@ import 'package:auvnet_internship_assessment/features/authentication/data/data_s
 import 'package:auvnet_internship_assessment/features/authentication/data/repositories/auth_repository_impl.dart';
 import 'package:auvnet_internship_assessment/features/authentication/domain/repositories/auth_repository.dart';
 import 'package:auvnet_internship_assessment/features/authentication/domain/use_cases/auth_use_cases.dart';
+import 'package:auvnet_internship_assessment/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:auvnet_internship_assessment/features/onboarding/data/data_sources/onboarding_local_datasource.dart';
 import 'package:auvnet_internship_assessment/features/onboarding/data/repositories/onboarding_repository_impl.dart';
 import 'package:auvnet_internship_assessment/features/onboarding/domain/repositories/onboarding_repository.dart';
@@ -111,4 +112,7 @@ Future<void> setupInjection() async {
       getUser: GetUserUseCase(getIt<AuthRepository>()),
     ),
   );
+
+  // bloc
+  getIt.registerFactory(() => AuthBloc(authUseCases: getIt<AuthUseCases>()));
 }
