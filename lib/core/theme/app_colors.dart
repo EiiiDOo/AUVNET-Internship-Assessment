@@ -13,8 +13,6 @@ class AppColors {
   static final Color gradientStart = Color.fromARGB(41, 14, 190, 125);
 }
 
-
-
 // primary 8900FE
 // background FFFFFF
 // link to other page 1877F2
