@@ -1,8 +1,10 @@
 import 'package:auvnet_internship_assessment/core/constants/user_keys.dart';
 import 'package:auvnet_internship_assessment/core/error/error_parse.dart';
+import 'package:auvnet_internship_assessment/core/error/exceptions.dart';
 import 'package:auvnet_internship_assessment/features/authentication/domain/use_cases/auth_use_cases.dart';
 import 'package:auvnet_internship_assessment/features/authentication/presentation/bloc/auth_event.dart';
 import 'package:auvnet_internship_assessment/features/authentication/presentation/bloc/auth_state.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
@@ -81,7 +83,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } else {
         emit(AuthSignedOutState());
       }
+    } on NetworkFailure catch (e) {
+      final isLoggedIn = await authUseCases.isSignedIn();
+      if (isLoggedIn) {
+        emit(AuthSuccessState(null));
+      } else {
+        if (kDebugMode) debugPrint('catch e isLoggedIn Else');
+        emit(AuthFailureState(e.errorMessage));
+      }
     } catch (e) {
+      if (kDebugMode) debugPrint('catch e');
+
       emit(AuthFailureState(e.errorMessage));
     }
   }
