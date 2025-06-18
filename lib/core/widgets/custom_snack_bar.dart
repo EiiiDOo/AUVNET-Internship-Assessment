@@ -15,9 +15,20 @@ enum SnackBarType {
 void customSnackBar({
   required BuildContext ctx,
   SnackBarType type = SnackBarType.normal,
-  Widget content = const Text('Content'),
+  String content = 'Content',
 }) {
   ScaffoldMessenger.of(ctx).showSnackBar(
-    SnackBar(backgroundColor: type.color, content: Text('validates')),
+    SnackBar(
+      backgroundColor: type.color,
+      content: Text(content, style: TextStyle(fontWeight: FontWeight.bold)),
+      padding: EdgeInsets.all(8),
+      action: SnackBarAction(
+        label: 'Cancel',
+        onPressed: () {
+          ScaffoldMessenger.of(ctx).hideCurrentSnackBar();
+        },
+        textColor: Colors.grey[200],
+      ),
+    ),
   );
 }
