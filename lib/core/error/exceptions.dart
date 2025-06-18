@@ -14,3 +14,15 @@ class NetworkFailure extends Failure {
 class UnknownFailure extends Failure {
   UnknownFailure() : super("Unexpected error occurred.");
 }
+
+class HiveFailure extends Failure {
+  HiveFailure(super.message);
+}
+
+class DotEnvFailure extends Failure {
+  DotEnvFailure(super.message);
+}
+
+class GetItFailure extends Failure {
+  GetItFailure(super.message);
+}

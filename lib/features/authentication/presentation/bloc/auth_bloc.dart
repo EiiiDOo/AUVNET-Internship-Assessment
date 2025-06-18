@@ -1,5 +1,5 @@
 import 'package:auvnet_internship_assessment/core/constants/user_keys.dart';
-import 'package:auvnet_internship_assessment/core/utils/extensions.dart';
+import 'package:auvnet_internship_assessment/core/error/error_parse.dart';
 import 'package:auvnet_internship_assessment/features/authentication/domain/use_cases/auth_use_cases.dart';
 import 'package:auvnet_internship_assessment/features/authentication/presentation/bloc/auth_event.dart';
 import 'package:auvnet_internship_assessment/features/authentication/presentation/bloc/auth_state.dart';
