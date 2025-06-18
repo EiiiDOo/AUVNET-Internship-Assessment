@@ -4,87 +4,74 @@ import 'package:auvnet_internship_assessment/core/widgets/custom_elevation_butto
 import 'package:auvnet_internship_assessment/core/widgets/custom_snack_bar.dart';
 import 'package:auvnet_internship_assessment/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:auvnet_internship_assessment/features/authentication/presentation/bloc/auth_event.dart';
-import 'package:auvnet_internship_assessment/features/authentication/presentation/bloc/auth_state.dart'
-    show
-        AuthState,
-        AuthLoadingState,
-        AuthSuccessState,
-        AuthFailureState,
-        AuthSignedOutState;
+import 'package:auvnet_internship_assessment/features/authentication/presentation/bloc/auth_state.dart';
 import 'package:auvnet_internship_assessment/features/authentication/presentation/utils/validators.dart';
 import 'package:auvnet_internship_assessment/features/authentication/presentation/widgets/custom_text_input_field.dart';
 import 'package:auvnet_internship_assessment/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SignUpForm extends StatefulWidget {
-  const SignUpForm({super.key});
+class SigninFrom extends StatefulWidget {
+  const SigninFrom({super.key});
 
   @override
-  State<SignUpForm> createState() => _SignUpFormState();
+  State<SigninFrom> createState() => _SigninFromState();
 }
 
-class _SignUpFormState extends State<SignUpForm> {
+class _SigninFromState extends State<SigninFrom> {
   final GlobalKey<FormState> _formState = GlobalKey();
   TextEditingController? _email;
   TextEditingController? _pass;
-  TextEditingController? _confirmPass;
 
   @override
   void initState() {
     super.initState();
     _email = TextEditingController();
     _pass = TextEditingController();
-    _confirmPass = TextEditingController();
   }
 
   @override
   void dispose() {
     if (_email != null) _email?.dispose();
     if (_pass != null) _pass?.dispose();
-    if (_confirmPass != null) _confirmPass?.dispose();
     super.dispose();
   }
 
-  signUp() async {
+  signIn() async {
     if (_formState.currentState!.validate()) {
       context.read<AuthBloc>().add(
-        SignUpRequestedEvent(_email!.text, _pass!.text),
+        SignInRequestedEvent(_email!.text, _pass!.text),
       );
     }
   }
 
-  // ScaffoldMessenger.of(
-  //   context,
-  // ).showSnackBar(SnackBar(content: Text('validates')));
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocListener<AuthBloc, AuthState>(
-        listener: (context, state) {
-          if (state is AuthLoadingState) {
-            customLoadingDialog(context);
-          } else {
-            Navigator.of(context, rootNavigator: true).pop();
-            if (state is AuthSuccessState) {
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                AppRoutes.home,
-                (route) => false,
-              );
-            } else if (state is AuthFailureState) {
-              customSnackBar(
-                ctx: context,
-                content: Text(state.message),
-                type: SnackBarType.error,
-              );
-            } else if (state is AuthSignedOutState) {
-              // TODO: Navigate to login screen
+      body: Center(
+        child: BlocListener<AuthBloc, AuthState>(
+          listener: (context, state) {
+            if (state is AuthLoadingState) {
+              customLoadingDialog(context);
+            } else {
+              Navigator.of(context, rootNavigator: true).pop();
+              if (state is AuthSuccessState) {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  AppRoutes.home,
+                  (route) => false,
+                );
+              } else if (state is AuthFailureState) {
+                customSnackBar(
+                  ctx: context,
+                  content: Text(state.message),
+                  type: SnackBarType.error,
+                );
+              } else if (state is AuthSignedOutState) {
+                // TODO: Navigate to login screen
+              }
             }
-          }
-        },
-        child: Center(
+          },
           child: ListView(
             children: [
               Form(
@@ -111,38 +98,26 @@ class _SignUpFormState extends State<SignUpForm> {
                             width: context.screenWidth,
                             validator: FormValidators.validatePassword,
                           ),
-                          customTextFormField(
-                            type: TextFormType.confirmPass,
-                            controller: _confirmPass,
-                            width: context.screenWidth,
-                            validator: (val) {
-                              if (FormValidators.validatePassword(val) ==
-                                  null) {
-                                return _pass?.text == _confirmPass?.text
-                                    ? null
-                                    : 'Not match with pass';
-                              } else {
-                                return FormValidators.validatePassword(val);
-                              }
-                            },
-                          ),
                         ],
                       ),
                       Column(
                         children: [
                           customElevationButton(
                             onPressed: () async {
-                              await signUp();
+                              await signIn();
                             },
                             width: context.screenWidth,
-                            text: 'Sign Up',
+                            text: 'Log In',
                           ),
                           TextButton(
                             onPressed: () {
-                              Navigator.pop(context);
+                              Navigator.pushReplacementNamed(
+                                context,
+                                AppRoutes.signUp,
+                              );
                             },
                             child: Text(
-                              "Already have an account",
+                              "Create an account",
                               style: context.theme.textTheme.labelLarge,
                             ),
                           ),
