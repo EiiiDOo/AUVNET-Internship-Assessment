@@ -1,4 +1,5 @@
 import 'package:auvnet_internship_assessment/core/theme/app_colors.dart';
+import 'package:auvnet_internship_assessment/core/utils/extensions.dart';
 import 'package:auvnet_internship_assessment/features/onboarding/core/onboarding_pages.dart';
 import 'package:auvnet_internship_assessment/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:auvnet_internship_assessment/features/onboarding/presentation/bloc/onboarding_event.dart';
@@ -22,8 +23,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return BlocProvider(
       create: (_) => getIt<OnboardingBloc>(),
       child: BlocConsumer<OnboardingBloc, OnboardingState>(
@@ -84,8 +83,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     alignment: Alignment.center,
                     children: [
                       Container(
-                        width: width,
-                        height: height / 3,
+                        width: context.screenWidth,
+                        height: context.screenHeight / 3,
                         decoration: BoxDecoration(
                           // TODO: Handel gradiant
                           gradient: RadialGradient(
