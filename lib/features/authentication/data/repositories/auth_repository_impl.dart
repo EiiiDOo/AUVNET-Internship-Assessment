@@ -57,6 +57,7 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<void> signOut() async {
     if (await networkInfo.isConnected()) {
       await remoteDataSource.signOut();
+      await localStorage.delete(StorageKeys.user);
     } else {
       throw NetworkFailure();
     }
