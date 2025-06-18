@@ -1,4 +1,5 @@
 import 'package:auvnet_internship_assessment/core/constants/storage_keys.dart';
+import 'package:auvnet_internship_assessment/core/constants/user_keys.dart';
 import 'package:auvnet_internship_assessment/core/error/exceptions.dart';
 import 'package:auvnet_internship_assessment/core/network/network._info.dart';
 import 'package:auvnet_internship_assessment/core/storage/local_storage.dart';
@@ -33,8 +34,8 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<bool> isSignedIn() async {
-    final data = localStorage.get(StorageKeys.user.name);
-    if (data != null && data is Map<String, dynamic>) {
+    final data = await localStorage.get(StorageKeys.user.name);
+    if (data != null && data is Map && data.containsKey(UserKeys.email.name)) {
       return true;
     } else {
       return false;
