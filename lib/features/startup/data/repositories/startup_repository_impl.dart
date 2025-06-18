@@ -1,4 +1,4 @@
-import 'package:auvnet_internship_assessment/features/startup/data/datasources/startup_local_datasource.dart';
+import 'package:auvnet_internship_assessment/features/startup/data/data_sources/startup_local_datasource.dart';
 import 'package:auvnet_internship_assessment/features/startup/domain/entities/startup_status.dart';
 import 'package:auvnet_internship_assessment/features/startup/domain/repositories/startup_repository.dart';
 

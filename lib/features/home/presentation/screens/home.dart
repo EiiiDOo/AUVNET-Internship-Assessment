@@ -1,4 +1,4 @@
-import 'package:auvnet_internship_assessment/features/authentication/data/datasources/auth_remote_data_source.dart';
+import 'package:auvnet_internship_assessment/features/authentication/data/data_sources/auth_remote_data_source.dart';
 import 'package:auvnet_internship_assessment/injection.dart';
 import 'package:flutter/material.dart';
 

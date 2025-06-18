@@ -5,7 +5,6 @@ import 'package:auvnet_internship_assessment/features/authentication/presentatio
 import 'package:auvnet_internship_assessment/features/authentication/presentation/bloc/auth_state.dart'
     show
         AuthState,
-        AuthInitialState,
         AuthLoadingState,
         AuthSuccessState,
         AuthFailureState,
