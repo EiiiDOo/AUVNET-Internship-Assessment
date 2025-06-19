@@ -1,3 +1,4 @@
+import 'package:auvnet_internship_assessment/core/theme/app_colors.dart';
 import 'package:auvnet_internship_assessment/features/home/presentation/screens/tabs/cart_tab.dart';
 import 'package:auvnet_internship_assessment/features/home/presentation/screens/tabs/categories_tab.dart';
 import 'package:auvnet_internship_assessment/features/home/presentation/screens/tabs/delivery_tab.dart';
@@ -22,20 +23,29 @@ class _HomeScreenState extends State<HomeScreen> {
     'Profile': ProfileTab(),
   };
   final List<BottomNavigationBarItem> _items = [
-    BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-    BottomNavigationBarItem(icon: Icon(Icons.category), label: 'Categories'),
-    BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Cart'),
+    BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
     BottomNavigationBarItem(
-      icon: Icon(Icons.local_shipping),
+      icon: Icon(Icons.category_outlined),
+      label: 'Categories',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.shopping_cart_outlined),
+      label: 'Cart',
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.delivery_dining_outlined),
       label: 'Delivery',
     ),
-    BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+    BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Profile'),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _tabs.values.toList()[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: AppColors.primary,
+        unselectedItemColor: AppColors.titleText,
+
         currentIndex: _currentIndex,
         onTap: (value) => setState(() => _currentIndex = value),
         items: _items,

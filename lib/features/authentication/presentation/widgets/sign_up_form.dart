@@ -131,6 +131,7 @@ class _SignUpFormState extends State<SignUpForm> {
                                 return FormValidators.validatePassword(val);
                               }
                             },
+                            textInputAction: TextInputAction.done,
                           ),
                         ],
                       ),

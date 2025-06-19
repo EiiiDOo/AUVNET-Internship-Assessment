@@ -1,4 +1,3 @@
-import 'package:auvnet_internship_assessment/core/constants/local_storage_keys.dart';
 import 'package:auvnet_internship_assessment/core/error/exceptions.dart';
 import 'package:auvnet_internship_assessment/core/network/network._info.dart';
 import 'package:auvnet_internship_assessment/core/storage/local_storage.dart';
@@ -73,7 +72,6 @@ class HomeRepositoryImpl extends HomeRepository {
   Future<List<ServicesEntity>> getServicesList() async {
     if (await networkInfo.isConnected()) {
       final models = await homeRemoteDataSource.getServicesList();
-      print('services: $models');
       // await localStorage.put(LocalStorageKeys.services.name, models);
       final entities = models.map((e) {
         return e.toEntity();

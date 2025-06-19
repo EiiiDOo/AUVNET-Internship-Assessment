@@ -7,6 +7,7 @@ Widget customTextFormField({
   required TextEditingController? controller,
   required double width,
   String? Function(String?)? validator,
+  TextInputAction textInputAction = TextInputAction.continueAction,
 }) {
   return Container(
     width: width * 0.8,
@@ -18,6 +19,8 @@ Widget customTextFormField({
       color: AppColors.inputFill.withAlpha(60),
     ),
     child: TextFormField(
+      textInputAction: textInputAction,
+      keyboardType: type.keyboardType,
       maxLines: 1,
       validator: validator,
       obscureText: type.isObscure,
@@ -54,5 +57,11 @@ enum TextFormType {
     TextFormType.email => Icons.email_outlined,
     TextFormType.pass => Icons.lock_outline,
     TextFormType.confirmPass => Icons.lock_outline,
+  };
+
+  TextInputType get keyboardType => switch (this) {
+    TextFormType.email => TextInputType.emailAddress,
+    TextFormType.pass => TextInputType.visiblePassword,
+    TextFormType.confirmPass => TextInputType.visiblePassword,
   };
 }
