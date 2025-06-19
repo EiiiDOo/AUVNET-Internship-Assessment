@@ -3,6 +3,16 @@
 A Flutter-based e-commerce app built using Clean Architecture, BLoC state management, and Supabase backend integration. Dependency injection is handled with GetIt. Splash screen is configured using `flutter_native_splash`.
 
 ---
+## - Screen Shots
+<img src="https://github.com/user-attachments/assets/29ee7ed8-4e49-45c7-a59c-df61f0eb793f" alt="WhatsApp Image 0" width="200" style="margin:10"/>
+<img src="https://github.com/user-attachments/assets/4e9d8cd0-e2d4-43a9-b8c0-052ecdd60734" alt="WhatsApp Image 1" width="200" style="margin:10"/>
+<img src="https://github.com/user-attachments/assets/65b257de-8cbe-4cc9-9a29-754876dfd4e7" alt="WhatsApp Image 2" width="200" style="margin:10"/>
+<img src="https://github.com/user-attachments/assets/79ac429a-0f2d-449e-9de6-6b0a0896e75e" alt="WhatsApp Image 3" width="200" style="margin:10"/>
+<img src="https://github.com/user-attachments/assets/e77895cc-a175-4146-8a87-0c66cb26cbf2" alt="WhatsApp Image 4" width="200" style="margin:10"/>
+<img src="https://github.com/user-attachments/assets/5b3bf6fd-5f93-4301-b338-f55cc25bd853" alt="WhatsApp Image 5" width="200" style="margin:10"/>
+<img src="https://github.com/user-attachments/assets/1a8a41e7-1407-4c30-b1a5-1a14d5d2289b" alt="WhatsApp Image 6" width="200" style="margin:10"/>
+<img src="https://github.com/user-attachments/assets/b708f5ab-7cb8-48c5-b3c8-38ad114b52a4" alt="WhatsApp Image 7" width="200" style="margin:10"/>
+
 
 ## 📁 Project Structure
 ```
