@@ -24,4 +24,20 @@ class AppTextStyles {
     color: AppColors.link,
     fontWeight: FontWeight.bold,
   );
+
+  static const TextStyle homeSideTitle = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+  );
+  static const TextStyle homeNameMedium = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+  );
+  static const TextStyle homeSmall = TextStyle(
+    fontSize: 10,
+    fontWeight: FontWeight.bold,
+    color: Colors.black38,
+  );
 }
