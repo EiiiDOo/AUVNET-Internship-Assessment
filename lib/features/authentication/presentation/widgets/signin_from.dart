@@ -97,7 +97,6 @@ class _SigninFromState extends State<SigninFrom> {
                             controller: _pass,
                             width: context.screenWidth,
                             validator: FormValidators.validatePassword,
-                            textInputAction: TextInputAction.done,
                           ),
                         ],
                       ),

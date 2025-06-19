@@ -7,7 +7,6 @@ Widget customTextFormField({
   required TextEditingController? controller,
   required double width,
   String? Function(String?)? validator,
-  TextInputAction textInputAction = TextInputAction.continueAction,
 }) {
   return Container(
     width: width * 0.8,
@@ -19,7 +18,6 @@ Widget customTextFormField({
       color: AppColors.inputFill.withAlpha(60),
     ),
     child: TextFormField(
-      textInputAction: textInputAction,
       keyboardType: type.keyboardType,
       maxLines: 1,
       validator: validator,
